@@ -1,4 +1,6 @@
 import 'package:edu_ecommerce_bloc/cubits/theme.dart';
+import 'package:edu_ecommerce_bloc/cubits/users.dart';
+import 'package:edu_ecommerce_bloc/widgets/users/UserListing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +17,9 @@ class Application extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => ThemeCubit(),
+          ),
+          BlocProvider(
+            create: (context) => UsersCubit(),
           )
         ],
         child: BlocBuilder<ThemeCubit, ThemeData>(
@@ -41,6 +46,7 @@ class HomeScreen extends StatelessWidget {
           context.read<ThemeCubit>().toggleTheme();
         },
       ),
+      body: const UserListing(),
     );
   }
 }
