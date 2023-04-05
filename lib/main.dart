@@ -1,5 +1,8 @@
+import 'package:edu_ecommerce_bloc/cubits/authentication.dart';
 import 'package:edu_ecommerce_bloc/cubits/theme.dart';
 import 'package:edu_ecommerce_bloc/cubits/users.dart';
+import 'package:edu_ecommerce_bloc/repository/authentication.dart';
+import 'package:edu_ecommerce_bloc/widgets/authentication/LoginForm.dart';
 import 'package:edu_ecommerce_bloc/widgets/users/UserListing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +23,8 @@ class Application extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => UsersCubit(),
-          )
+          ),
+          BlocProvider(create: (context) => AuthenticationCubit(authenticationRepository: AuthenticationRepository()),)
         ],
         child: BlocBuilder<ThemeCubit, ThemeData>(
           builder: (context, state) {
@@ -46,7 +50,8 @@ class HomeScreen extends StatelessWidget {
           context.read<ThemeCubit>().toggleTheme();
         },
       ),
-      body: const UserListing(),
+      // body: const UserListing(),
+      body: const LoginForm(),
     );
   }
 }
