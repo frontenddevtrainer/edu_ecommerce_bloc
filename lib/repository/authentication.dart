@@ -2,12 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:edu_ecommerce_bloc/models/user.dart';
 import 'package:flutter/foundation.dart';
 import "dart:io" show Platform;
+import "package:flutter_secure_storage/flutter_secure_storage.dart";
 
 class AuthenticationRepository {
-
-  static final String _baseUrl = kReleaseMode ? "https://edureka.co" : (Platform.isAndroid ? "http://10.0.2.2:3000" : "http://localhost:3000");
+  static final String _baseUrl = kReleaseMode
+      ? "https://edureka.co"
+      : (Platform.isAndroid ? "http://10.0.2.2:3000" : "http://localhost:3000");
 
   static final dio = Dio(BaseOptions(baseUrl: _baseUrl));
+
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   User? currentUser() {
     // throw UnimplementedError();
@@ -18,8 +22,8 @@ class AuthenticationRepository {
     print(email);
     print(password);
     try {
-      final response = await dio.post("/login",
-          data: {email: email, password: password});
+      final response =
+          await dio.post("/login", data: {email: email, password: password});
       return User(name: response.data["name"], id: response.data["id"]);
     } catch (e) {
       throw UnimplementedError();
@@ -31,13 +35,14 @@ class AuthenticationRepository {
   }
 
   Future<User> signup(String email, String password) async {
-    print(email);
-    print(password);
     try {
-      final response = await dio.post("/signup",
-          data: {"email": email, "password": password});
-          print(response);
-      return User(name: response.data["name"], id: response.data["id"]);
+      final response = await dio
+          .post("/signup", data: {"email": email, "password": password});
+      await secureStorage.write(key: "auth_jwt", value: response.data["accessToken"]);
+
+      return User(
+          name: response.data["user"]["email"],
+          id: response.data["user"]["id"]);
     } catch (e) {
       print(e);
       throw UnimplementedError();

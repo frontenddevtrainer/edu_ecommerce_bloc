@@ -17,6 +17,21 @@
       "email": "praveen@example.com",
       "password": "$2a$10$BQ53zAbIL.heoISBi38uUeDq.QsHMcgATokcDPSqLHy/.n.lMRpy.",
       "id": 2
+    },
+    {
+      "email": "dadasd@dasdasd.dsa",
+      "password": "$2a$10$MTetg2zwqHpwnQ6m2LhjSOUvVm7M4c9s7IFWnXGpmC3C4WG/CWhjS",
+      "id": 3
+    },
+    {
+      "email": "asddasd@dasda.dsad",
+      "password": "$2a$10$xoEGv/w0fcNzNm29cfEX.OKoc0N.K0OELd6afdiFnYHdUnXmx0Gla",
+      "id": 4
+    },
+    {
+      "email": "dasda@dasd.ds",
+      "password": "$2a$10$CnNUJ92byVs4OequFZKT2eTknxG0PGjfJp9WL2d14HAgxm5Wmb4Bq",
+      "id": 5
     }
   ]
 }
