@@ -5,7 +5,6 @@ import "dart:io" show Platform;
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 
 class AuthenticationRepository {
-
   final FlutterSecureStorage secureStorage;
 
   static final String _baseUrl = kReleaseMode
@@ -18,7 +17,7 @@ class AuthenticationRepository {
 
   User? currentUser() {
     // throw UnimplementedError();
-    return User(name: "praveen", id: "1");
+    return null;
   }
 
   Future<User> login(String email, String password) async {
@@ -39,7 +38,8 @@ class AuthenticationRepository {
     try {
       final response = await dio
           .post("/signup", data: {"email": email, "password": password});
-      await secureStorage.write(key: "auth_jwt", value: response.data["accessToken"]);
+      await secureStorage.write(
+          key: "auth_jwt", value: response.data["accessToken"]);
       return User(
           name: response.data["user"]["email"],
           id: response.data["user"]["id"]);

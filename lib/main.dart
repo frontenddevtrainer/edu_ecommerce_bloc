@@ -10,18 +10,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() {
-    const FlutterSecureStorage secureStorage = FlutterSecureStorage();
-    final AuthenticationRepository authRepo  = AuthenticationRepository( secureStorage: secureStorage);
+  const FlutterSecureStorage secureStorage = FlutterSecureStorage();
+  final AuthenticationRepository authRepo =
+      AuthenticationRepository(secureStorage: secureStorage);
 
-  runApp(Application( authRepo: authRepo, secureStorage: secureStorage ));
+  runApp(Application(authRepo: authRepo, secureStorage: secureStorage));
 }
 
 class Application extends StatelessWidget {
-
   final AuthenticationRepository authRepo;
   final FlutterSecureStorage secureStorage;
 
-  const Application({super.key, required this.authRepo, required this.secureStorage});
+  const Application(
+      {super.key, required this.authRepo, required this.secureStorage});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,10 @@ class Application extends StatelessWidget {
           BlocProvider(
             create: (context) => UsersCubit(),
           ),
-          BlocProvider(create: (context) => AuthenticationCubit(authenticationRepository: authRepo),)
+          BlocProvider(
+            create: (context) =>
+                AuthenticationCubit(authenticationRepository: authRepo),
+          )
         ],
         child: BlocBuilder<ThemeCubit, ThemeData>(
           builder: (context, state) {
@@ -60,7 +64,17 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       // body: const UserListing(),
-      body: const RegisterForm(),
+      body: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+        builder: (context, state) {
+          if (state is AuthenticationNotComplete) {
+            return const RegisterForm();
+          } else if (state is AuthenticationStateLoaded) {
+            return const Text("user logged in");
+          } else {
+            return const RegisterForm();
+          }
+        },
+      ),
     );
   }
 }

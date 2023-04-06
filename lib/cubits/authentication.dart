@@ -41,6 +41,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   Future<void> signup(String email, String password) async {
     try {
       final user = await authenticationRepository.signup(email, password);
+      print(user.id);
       emit(AuthenticationStateLoaded(user: user));
     } catch (e) {
       emit(AuthenticationStateError());
