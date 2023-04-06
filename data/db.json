@@ -12,6 +12,11 @@
       "email": "asdasd@das.dsa",
       "password": "$2a$10$0owMvK5.YFmkRO9d6182geGnpVS4wizrDut.Krc0Ae4F.jRR1hn.y",
       "id": 1
+    },
+    {
+      "email": "praveen@example.com",
+      "password": "$2a$10$BQ53zAbIL.heoISBi38uUeDq.QsHMcgATokcDPSqLHy/.n.lMRpy.",
+      "id": 2
     }
   ]
 }
