@@ -1,0 +1,10 @@
+{
+    "products": [
+        {
+            "name": "Macbook Pro 14",
+            "id": "1",
+            "price": 100000.00,
+            "images": []
+        }
+    ]
+}
