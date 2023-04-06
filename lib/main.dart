@@ -7,13 +7,21 @@ import 'package:edu_ecommerce_bloc/widgets/authentication/RegisterForm.dart';
 import 'package:edu_ecommerce_bloc/widgets/users/UserListing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() {
-  runApp(const Application());
+    const FlutterSecureStorage secureStorage = FlutterSecureStorage();
+    final AuthenticationRepository authRepo  = AuthenticationRepository( secureStorage: secureStorage);
+
+  runApp(Application( authRepo: authRepo, secureStorage: secureStorage ));
 }
 
 class Application extends StatelessWidget {
-  const Application({super.key});
+
+  final AuthenticationRepository authRepo;
+  final FlutterSecureStorage secureStorage;
+
+  const Application({super.key, required this.authRepo, required this.secureStorage});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class Application extends StatelessWidget {
           BlocProvider(
             create: (context) => UsersCubit(),
           ),
-          BlocProvider(create: (context) => AuthenticationCubit(authenticationRepository: AuthenticationRepository()),)
+          BlocProvider(create: (context) => AuthenticationCubit(authenticationRepository: authRepo),)
         ],
         child: BlocBuilder<ThemeCubit, ThemeData>(
           builder: (context, state) {
