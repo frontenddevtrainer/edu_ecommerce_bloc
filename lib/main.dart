@@ -3,6 +3,7 @@ import 'package:edu_ecommerce_bloc/cubits/theme.dart';
 import 'package:edu_ecommerce_bloc/cubits/users.dart';
 import 'package:edu_ecommerce_bloc/repository/authentication.dart';
 import 'package:edu_ecommerce_bloc/widgets/authentication/LoginForm.dart';
+import 'package:edu_ecommerce_bloc/widgets/authentication/RegisterForm.dart';
 import 'package:edu_ecommerce_bloc/widgets/users/UserListing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +52,7 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       // body: const UserListing(),
-      body: const LoginForm(),
+      body: const RegisterForm(),
     );
   }
 }

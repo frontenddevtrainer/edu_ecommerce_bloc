@@ -27,4 +27,19 @@ class AuthenticationRepository {
   Future<User> logout() {
     throw UnimplementedError();
   }
+
+  @override
+  Future<User> signup(String email, String password) async {
+    print(email);
+    print(password);
+    try {
+      final response = await dio.post("http://localhost:3000/signup",
+          data: {"email": email, "password": password});
+          print(response);
+      return User(name: response.data["name"], id: response.data["id"]);
+    } catch (e) {
+      print(e);
+      throw UnimplementedError();
+    }
+  }
 }

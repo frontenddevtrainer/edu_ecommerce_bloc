@@ -21,7 +21,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   Future<void> login(String email, String password) async {
     try {
-      final dynamic user = await authenticationRepository.login(email, password);
+      final dynamic user =
+          await authenticationRepository.login(email, password);
       emit(AuthenticationStateLoaded(user: user));
     } catch (e) {
       emit(AuthenticationStateError());
@@ -32,6 +33,15 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     try {
       await authenticationRepository.logout();
       emit(AuthenticationNotComplete());
+    } catch (e) {
+      emit(AuthenticationStateError());
+    }
+  }
+
+  Future<void> signup(String email, String password) async {
+    try {
+      final user = await authenticationRepository.signup(email, password);
+      emit(AuthenticationStateLoaded(user: user));
     } catch (e) {
       emit(AuthenticationStateError());
     }

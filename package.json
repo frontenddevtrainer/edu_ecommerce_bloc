@@ -8,11 +8,12 @@
     "test": "test"
   },
   "scripts": {
-    "apiserver" : "json-server ./data/db.json --watch"
+    "apiserver": "json-server ./data/db.json -m ./node_modules/json-server-auth --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "json-server": "^0.17.3"
+    "json-server": "^0.17.3",
+    "json-server-auth": "^2.1.0"
   }
 }
